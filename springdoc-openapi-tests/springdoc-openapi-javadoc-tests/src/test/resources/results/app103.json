@@ -1,0 +1,90 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "hello-controller",
+      "description": "The type Hello controller."
+    }
+  ],
+  "paths": {
+    "/test/103": {
+      "post": {
+        "tags": [
+          "hello-controller"
+        ],
+        "summary": "Post my request body string.",
+        "description": "Post my request body string.",
+        "operationId": "postMyRequestBody",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "body",
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "$ref": "#/components/schemas/ExampleBody"
+                  },
+                  "file": {
+                    "type": "string",
+                    "description": "the file",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "body": {
+                  "contentType": "application/json"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "the string",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExampleBody": {
+        "type": "object",
+        "properties": {
+          "stringParam": {
+            "type": "string",
+            "description": "The String param."
+          },
+          "intParam": {
+            "type": "integer",
+            "description": "The Int param.",
+            "format": "int32"
+          }
+        },
+        "description": "The type Example body."
+      }
+    }
+  }
+}

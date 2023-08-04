@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "hello-controller",
+      "description": "The type Hello controller."
+    }
+  ],
+  "paths": {
+    "/persons": {
+      "post": {
+        "tags": [
+          "hello-controller"
+        ],
+        "summary": "Persons my model.",
+        "description": "Persons my model.",
+        "operationId": "persons",
+        "parameters": [
+          {
+            "name": "myModel",
+            "in": "query",
+            "description": "the my model",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/MyModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the my model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Bar": {
+        "type": "object",
+        "properties": {
+          "bar": {
+            "type": "string",
+            "description": "The Bar."
+          }
+        },
+        "description": "The type Bar."
+      },
+      "Foo": {
+        "type": "object",
+        "properties": {
+          "foo": {
+            "type": "string",
+            "description": "The Foo."
+          }
+        },
+        "description": "The type Foo."
+      },
+      "MyModel": {
+        "type": "object",
+        "properties": {
+          "thing": {
+            "type": "object",
+            "description": "Hello",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Foo"
+              },
+              {
+                "$ref": "#/components/schemas/Bar"
+              }
+            ]
+          }
+        },
+        "description": "The type My model."
+      }
+    }
+  }
+}
