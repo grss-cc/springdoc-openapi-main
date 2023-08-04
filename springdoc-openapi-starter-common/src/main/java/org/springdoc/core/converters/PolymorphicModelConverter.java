@@ -24,6 +24,7 @@
 
 package org.springdoc.core.converters;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Iterator;
@@ -78,6 +79,12 @@ public class PolymorphicModelConverter implements ModelConverter {
 				resolvedSchema = getResolvedSchema(javaType, resolvedSchema);
 				if (resolvedSchema == null || resolvedSchema.get$ref() == null)
 					return resolvedSchema;
+				Annotation[] ctxAnnotations = type.getCtxAnnotations();
+				for (Annotation ctxAnnotation : ctxAnnotations) {
+					if (ctxAnnotation instanceof io.swagger.v3.oas.annotations.media.Schema schema){
+						resolvedSchema.setDescription(schema.description());
+					}
+				}
 				return composePolymorphicSchema(type, resolvedSchema, context.getDefinedModels().values());
 			}
 		}
